@@ -1,11 +1,22 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import { IUser } from "../../types";
+import { useAuth } from "../../context/authContext";
+import { logout } from "../../../../api/src/controllers/auth.controller";
 
-const User = () => {
+type Props = {
+  data: IUser;
+  logout: () => void;
+};
+
+const User = ({ data, logout }: Props) => {
   return (
     <>
-      <img src="" className="size-[40px] rounded-full object-cover" alt="" />
-      <span>umutbarlak</span>
+      <img
+        src={data?.photo}
+        className="size-[40px] rounded-full object-cover"
+        alt=""
+      />
+      <span>{data?.username}</span>
 
       <div className="w-[150px] text-[13px] flex-col text-center absolute top-[40px] transition duration-500 bg-gray-200 rounded-md hidden group-hover:flex">
         <Link className="px-5 py-2 hover:bg-gray-100" to={"/my-gigs"}>
@@ -20,10 +31,7 @@ const User = () => {
         <Link className="px-5 py-2 hover:bg-gray-100" to={"/"}>
           Mesajlar
         </Link>
-        <button
-          onClick={() => alert("çıkış yapılıyor")}
-          className="px-5 py-2 hover:bg-gray-100"
-        >
+        <button onClick={logout} className="px-5 py-2 hover:bg-gray-100">
           Çıkış Yap
         </button>
       </div>

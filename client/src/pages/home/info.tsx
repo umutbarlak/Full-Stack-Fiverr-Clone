@@ -14,7 +14,7 @@ const Info = () => {
       </p>
       <div className="grid md:grid-cols-2 gap-5">
         {items.map((i, key) => (
-          <div>
+          <div key={key}>
             <h5 className="font-semibold flex items-center gap-3">
               <BsFillPatchCheckFill className="text-lg" />
               {i.title}
