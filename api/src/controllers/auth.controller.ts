@@ -44,16 +44,16 @@ export const login = catchAsync(
       }
     );
 
-    const { password, ...userWithoutPass } = user;
+    user.password = "";
 
     res
       .cookie("token", token, {
-        httpOnly: true,
-        sameSite: "none",
+        httpOnly: false,
+        sameSite: "lax",
         expires: new Date(Date.now() + 14 * 24 * 3600 * 1000),
       })
       .status(200)
-      .json({ message: "Hesaba giriş yapıldı", user: userWithoutPass, token });
+      .json({ message: "Hesaba giriş yapıldı", user: user, token });
   }
 );
 
@@ -63,5 +63,17 @@ export const logout = catchAsync(
       .clearCookie("token")
       .status(200)
       .json({ message: "Hesaptan çıkış yapıldı" });
+  }
+);
+
+export const profile = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const user = await User.findById(req.userId);
+
+    if (!user) return next(error(404, "Kullanıcı bulunamadı"));
+
+    user.password = "";
+
+    res.status(200).json({ message: "Profil bilgileri alındı", user });
   }
 );

@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 
-const errorMiddleware = (
-  err: { status?: number; message?: string },
+const errorMiddleware: ErrorRequestHandler = (
+  err,
   req: Request,
   res: Response,
   next: NextFunction
@@ -16,9 +16,11 @@ const errorMiddleware = (
   const errorStatus: number = err.status || 500;
   const errMessage: string = err.message || "Üzgünüz birşeyler ters gitti";
 
-  return res
+  res
     .status(errorStatus)
     .json({ status: "error", statusCode: errorStatus, message: errMessage });
+
+  return;
 };
 
 export default errorMiddleware;

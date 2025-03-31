@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.route.ts";
 import gigRouter from "./routes/gig.route.ts";
 import reviewRouter from "./routes/review.route.ts";
@@ -26,6 +27,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api/gigs", gigRouter);
