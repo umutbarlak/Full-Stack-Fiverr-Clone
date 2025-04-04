@@ -1,4 +1,4 @@
-import { ICategory, IInfo } from "../types";
+import { ICategory, IInfo, IInput } from "../types";
 import {
   FaCode,
   FaPaintBrush,
@@ -42,67 +42,67 @@ export const items: IInfo[] = [
   },
 ];
 
-// export const inputs: IInput[] = [
-//   {
-//     label: "Başlık",
-//     name: "title",
-//     required: true,
-//   },
-//   {
-//     label: "Kapak Fotoğrafı",
-//     name: "coverImage",
-//     required: true,
-//     type: "file",
-//   },
-//   {
-//     label: "Fotoğraflar",
-//     name: "images",
-//     required: true,
-//     type: "file",
-//     multiple: true,
-//   },
-//   {
-//     label: "Revizyon Sayısı",
-//     name: "package_revisions",
-//     required: true,
-//     type: "number",
-//     min: 1,
-//   },
-//   {
-//     label: "Özellikler (',' ile ayırınız)",
-//     name: "package_features",
-//     required: true,
-//     type: "textarea",
-//   },
-//   {
-//     label: "Açıklama",
-//     name: "description",
-//     required: true,
-//     type: "textarea",
-//   },
-//   {
-//     label: "Paket Açıklaması",
-//     name: "package_description",
-//     required: true,
-//   },
-//   {
-//     label: "Paket Başlığı",
-//     name: "package_title",
-//     required: true,
-//   },
-//   {
-//     label: "Teslimat Süresi (gün)",
-//     name: "package_duration",
-//     required: true,
-//     type: "number",
-//     min: 1,
-//     max: 90,
-//   },
-//   {
-//     label: "Fiyat ($)",
-//     name: "package_price",
-//     type: "number",
-//     required: true,
-//     min: 1,
-//   },
-// ];
+export const inputs: IInput[] = [
+  {
+    label: "Başlık",
+    name: "title",
+    required: true,
+  },
+  {
+    label: "Kapak Fotoğrafı",
+    name: "coverImage",
+    required: true,
+    type: "file",
+  },
+  {
+    label: "Fotoğraflar",
+    name: "images",
+    required: true,
+    type: "file",
+    multiple: true,
+  },
+  {
+    label: "Revizyon Sayısı",
+    name: "package_revisions",
+    required: true,
+    type: "number",
+    min: 1,
+  },
+  {
+    label: "Özellikler (',' ile ayırınız)",
+    name: "package_features",
+    required: true,
+    type: "textarea",
+  },
+  {
+    label: "Açıklama",
+    name: "description",
+    required: true,
+    type: "textarea",
+  },
+  {
+    label: "Paket Açıklaması",
+    name: "package_description",
+    required: true,
+  },
+  {
+    label: "Paket Başlığı",
+    name: "package_title",
+    required: true,
+  },
+  {
+    label: "Teslimat Süresi (gün)",
+    name: "package_duration",
+    required: true,
+    type: "number",
+    min: 1,
+    max: 90,
+  },
+  {
+    label: "Fiyat ($)",
+    name: "package_price",
+    type: "number",
+    required: true,
+    min: 1,
+  },
+];

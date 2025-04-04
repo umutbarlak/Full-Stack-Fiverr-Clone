@@ -7,7 +7,7 @@ type Props = {
   type?: "text" | "number" | "file" | "textarea" | "email" | "password";
   min?: number;
   max?: number;
-  isMulti?: boolean;
+  multiple?: boolean;
 };
 
 const Input = ({
@@ -19,7 +19,7 @@ const Input = ({
   required = false,
   min,
   max,
-  isMulti,
+  multiple,
 }: Props) => {
   return (
     <div className="mb-5">
@@ -43,7 +43,7 @@ const Input = ({
           type={type}
           min={min}
           max={max}
-          multiple={isMulti}
+          multiple={multiple}
           required={required}
           placeholder={placeholder}
           disabled={disabled}

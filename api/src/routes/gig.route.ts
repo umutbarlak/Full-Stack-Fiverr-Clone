@@ -1,8 +1,27 @@
 import express, { Router } from "express";
+import {
+  createGig,
+  deleteGig,
+  getAllGigs,
+  getGig,
+} from "../controllers/gig.controller.ts";
+import protect from "../middleware/protect.ts";
+import updoad from "../utils/multer.ts";
 
 const router: Router = express.Router();
 
-router.route("/").get();
-router.route("/:id").get();
+router
+  .route("/")
+  .get(getAllGigs)
+  .post(
+    protect,
+    updoad.fields([
+      { name: "coverImage", maxCount: 1 },
+      { name: "images", maxCount: 6 },
+    ]),
+    createGig
+  );
+
+router.route("/:id").get(getGig).delete(protect, deleteGig);
 
 export default router;

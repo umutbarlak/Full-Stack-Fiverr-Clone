@@ -9,7 +9,7 @@ const Register = () => {
   const [isSeller, setIsSeller] = useState<boolean>(false);
   const { register } = useAuth();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);

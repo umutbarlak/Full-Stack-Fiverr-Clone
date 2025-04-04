@@ -4,12 +4,15 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import error from "../utils/error.ts";
 import catchAsync from "../utils/catchAsync.ts";
+import upload from "../utils/cloudinary.ts";
 
 export const register = catchAsync(
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    console.log(req.file);
-
     const hashedPass: string = bcrypt.hashSync(req.body.password, 12);
+
+    const ress = await upload(req.file?.path as string, next);
+
+    req.body.photo = ress?.secure_url;
 
     const newUser = await User.create({
       ...req.body,

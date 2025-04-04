@@ -70,6 +70,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         setUser(null);
         localStorage.removeItem("token");
         toast.info("Oturumunuz kapandı");
+        navigate("/login");
       })
       .catch((err) => console.log(err));
   };
