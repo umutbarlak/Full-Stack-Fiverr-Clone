@@ -8,7 +8,7 @@ const Hero = () => {
     e.preventDefault();
     const text = (e.currentTarget[0] as HTMLInputElement).value;
 
-    navigate(`/search?query=${text}`);
+    if (text) navigate(`/search?query=${text}`);
   };
   return (
     <section className="bg-f-green max-md:-m-5 h-[40vh] text-white px-6 py-5 md:px-12 md:py-10 md:rounded-md flex flex-col justify-center items-center">

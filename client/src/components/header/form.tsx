@@ -10,7 +10,7 @@ const Form = () => {
 
     const text = (e.currentTarget[0] as HTMLInputElement).value;
 
-    navigate(`/search?query=${text}`);
+    if (text) navigate(`/search?query=${text}`);
   };
   return (
     <form

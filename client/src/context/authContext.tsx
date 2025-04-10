@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 type ContextType = {
   user: IUser | null;
+  isLoading: boolean;
   register: (user: IFormUser) => void;
   login: (user: ILoginUser) => void;
   logout: () => void;
@@ -13,6 +14,7 @@ type ContextType = {
 
 export const AuthContext = createContext<ContextType>({
   user: null,
+  isLoading: true,
   register: () => {},
   login: () => {},
   logout: () => {},
@@ -20,18 +22,24 @@ export const AuthContext = createContext<ContextType>({
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+
+  console.log(isLoading);
 
   useEffect(() => {
     const token = localStorage.getItem("token") || document.cookie;
-
-    if (!token) return;
+    setIsLoading(true);
+    if (!token) return setIsLoading(false);
     api
       .get("/auth/profile")
       .then((res) => setUser(res.data.user))
       .catch((err) => {
         localStorage.removeItem("token");
         toast.info("Oturumunuzun süresi doldu tekrar giriş yapın");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -52,6 +60,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   const login = (user: ILoginUser) => {
+    setIsLoading(true);
     api
       .post("/auth/login", user)
       .then((res) => {
@@ -60,7 +69,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         toast.success("Oturumunuz açıldı");
         navigate("/");
       })
-      .catch((err) => toast.error(err.response?.data?.message));
+      .catch((err) => toast.error(err.response?.data?.message))
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const logout = () => {
@@ -76,7 +88,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, register, login, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, register, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
